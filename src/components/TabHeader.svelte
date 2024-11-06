@@ -5,7 +5,8 @@
 	const links = [
 		{ name: 'Home', href: '/' },
 		{ name: 'Linear Regression', href: '/linear-regression' },
-		{ name: 'K-means Clustering', href: '/kmeans' }
+		{ name: 'K-means Clustering', href: '/kmeans' },
+		{ name: "Conway's Game of Life", href: '/conways' }
 	];
 
 	let currentPath = get(page).url.pathname;
