@@ -15,7 +15,7 @@
 	}
 </script>
 
-<div class="m-4 mb-8 rounded-lg border border-gray-700 bg-gray-900 p-4">
+<div class="m-4 mb-8 rounded-lg border border-gray-700 bg-midnight-800 p-4">
 	<div class="mb-4 flex items-center justify-center">
 		<label for="dataset" class="mr-2 text-lg text-white">Select Dataset:</label>
 		<select
@@ -32,7 +32,7 @@
 			class="ml-4 rounded-md bg-blue-800 p-2 text-white shadow transition hover:bg-blue-700"
 			on:click={generateRandomDataset}
 		>
-			Generate New
+			Generate
 		</button>
 	</div>
 	<slot />
