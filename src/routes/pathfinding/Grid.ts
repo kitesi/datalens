@@ -13,9 +13,9 @@ export const COLORS = {
 };
 
 export abstract class Grid {
-	rows: number = 10;
-	columns: number = 10;
-	ts: number = 50;
+	rows: number = 20;
+	columns: number = 20;
+	ts: number = 25;
 
 	mouseDown: boolean = false;
 

@@ -56,20 +56,20 @@
 		<button
 			on:click={handleRunStop}
 			disabled={$solutionSolved}
-			class="rounded border border-midnight-700 px-4 py-2 text-white hover:bg-midnight-700 disabled:cursor-not-allowed disabled:text-gray-400 disabled:line-through"
+			class="rounded border border-midnight-700 px-4 py-2  hover:bg-midnight-700 disabled:cursor-not-allowed disabled:text-gray-400 disabled:line-through"
 		>
 			{$stopped || !$solutionStarted ? 'Run' : 'Stop'}
 		</button>
 		<button
 			on:click={resetGrid}
-			class="rounded border border-midnight-700 px-4 py-2 text-white hover:bg-midnight-700"
+			class="rounded border border-midnight-700 px-4 py-2  hover:bg-midnight-700"
 		>
 			Reset Grid
 		</button>
 
 		<button
 			on:click={() => setCurrentManualNode('start')}
-			class={`rounded border border-midnight-700 px-4 py-2 text-white hover:bg-midnight-700  disabled:cursor-not-allowed disabled:text-gray-400 disabled:line-through ${$currentManualNode === 'start' ? `bg-purple-100 text-purple-700 underline hover:bg-purple-100` : ''}`}
+			class={`rounded border border-midnight-700 px-4 py-2 hover:bg-midnight-700  disabled:cursor-not-allowed disabled:text-gray-400 disabled:line-through ${$currentManualNode === 'start' ? `bg-purple-100 text-purple-700 underline hover:bg-purple-100` : ''}`}
 			disabled={$solutionStarted}
 		>
 			Set Start
@@ -77,35 +77,35 @@
 		<button
 			on:click={() => setCurrentManualNode('end')}
 			disabled={$solutionStarted}
-			class={`rounded border border-midnight-700 px-4 py-2 text-white hover:bg-midnight-700  disabled:cursor-not-allowed disabled:text-gray-400 disabled:line-through ${$currentManualNode === 'end' ? `bg-purple-100 text-purple-700 underline hover:bg-purple-100` : ''}`}
+			class={`rounded border border-midnight-700 px-4 py-2  hover:bg-midnight-700  disabled:cursor-not-allowed disabled:text-gray-400 disabled:line-through ${$currentManualNode === 'end' ? `bg-purple-100 text-purple-700 underline hover:bg-purple-100` : ''}`}
 		>
 			Set End
 		</button>
 		<button
 			on:click={() => grid?.addWalls(ctx, 30)}
 			disabled={$solutionStarted}
-			class="rounded border border-midnight-700 px-4 py-2 text-white hover:bg-midnight-700  disabled:cursor-not-allowed disabled:text-gray-400 disabled:line-through"
+			class="rounded border border-midnight-700 px-4 py-2  hover:bg-midnight-700  disabled:cursor-not-allowed disabled:text-gray-400 disabled:line-through"
 		>
 			Add Walls Randomly
 		</button>
 		<button
 			on:click={() => setCurrentManualNode('wall')}
 			disabled={$solutionStarted}
-			class={`rounded border border-midnight-700 px-4 py-2 text-white hover:bg-midnight-700  disabled:cursor-not-allowed disabled:text-gray-400 disabled:line-through ${$currentManualNode === 'wall' ? 'bg-purple-100 text-purple-700 underline hover:bg-purple-100' : ''}`}
+			class={`rounded border border-midnight-700 px-4 py-2  hover:bg-midnight-700  disabled:cursor-not-allowed disabled:text-gray-400 disabled:line-through ${$currentManualNode === 'wall' ? 'bg-purple-100 text-purple-700 underline hover:bg-purple-100' : ''}`}
 		>
 			Add Walls Manually
 		</button>
 		<button
 			on:click={() => setCurrentManualNode('remove-wall')}
 			disabled={$solutionStarted}
-			class={`rounded border border-midnight-700 px-4 py-2 text-white hover:bg-midnight-700  disabled:cursor-not-allowed disabled:text-gray-400 disabled:line-through ${$currentManualNode === 'remove-wall' ? 'bg-purple-100 text-purple-700 underline hover:bg-purple-100' : ''}`}
+			class={`rounded border border-midnight-700 px-4 py-2  hover:bg-midnight-700  disabled:cursor-not-allowed disabled:text-gray-400 disabled:line-through ${$currentManualNode === 'remove-wall' ? 'bg-purple-100 text-purple-700 underline hover:bg-purple-100' : ''}`}
 		>
 			Remove Walls Manually
 		</button>
 		<button
 			on:click={() => setCurrentManualNode('')}
 			disabled={$currentManualNode === '' || $solutionStarted}
-			class={`rounded border border-midnight-700 px-4 py-2 text-white hover:bg-midnight-700 disabled:cursor-not-allowed disabled:text-gray-400 disabled:line-through`}
+			class={`rounded border border-midnight-700 px-4 py-2  hover:bg-midnight-700 disabled:cursor-not-allowed disabled:text-gray-400 disabled:line-through`}
 		>
 			Stop Selection
 		</button>
