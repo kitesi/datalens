@@ -6,8 +6,8 @@
 		{ name: 'Home', href: '/' },
 		{ name: 'Linear Regression', href: '/linear-regression' },
 		{ name: 'K-means Clustering', href: '/kmeans' },
-		{ name: "Conway's Game of Life", href: '/conways' }
-		// { name: 'Pathfinding (BFS, DFS, A*)', href: '/pathfinding' }
+		{ name: "Conway's Game of Life", href: '/conways' },
+		{ name: 'Pathfinding (BFS, DFS, A*)', href: '/pathfinding' }
 	];
 
 	let currentPath = get(page).url.pathname;
