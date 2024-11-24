@@ -12,11 +12,15 @@ export default class AStar extends Grid {
 		super(canvas);
 	}
 
-	getMapValueCurry(m: Map<Node, number>, default_v: number) {
+	static getMapValueCurry(m: Map<Node, number>, default_v: number) {
 		return function (n: Node) {
 			const k = m.get(n);
 			return k ?? default_v;
 		};
+	}
+
+	static heuristic(a: Node, b: Node) {
+		return Math.abs(a.i - b.i) + Math.abs(a.j - b.j);
 	}
 
 	solve(ctx: CanvasRenderingContext2D) {
@@ -34,18 +38,19 @@ export default class AStar extends Grid {
 		}
 
 		this.gScore.set(this.start, 0);
-		this.fScore.set(this.start, this.heuristic(this.start, this.end));
+		this.fScore.set(this.start, AStar.heuristic(this.start, this.end));
 
-		const getG = this.getMapValueCurry(this.gScore, Number.POSITIVE_INFINITY);
-		const getF = this.getMapValueCurry(this.fScore, Number.POSITIVE_INFINITY);
+		const getG = AStar.getMapValueCurry(this.gScore, Number.POSITIVE_INFINITY);
+		const getF = AStar.getMapValueCurry(this.fScore, Number.POSITIVE_INFINITY);
 
 		let bestIndex = 0;
 
-		for (let i = 1; i < this.open.length; i++) {
+		for (let i = 0; i < this.open.length; i++) {
 			if (getF(this.open[i]) < getF(this.open[bestIndex])) {
 				bestIndex = i;
-				this.fillColor(ctx, this.open[i], COLORS.open);
 			}
+
+			this.fillColor(ctx, this.open[i], COLORS.open);
 		}
 
 		for (const node of this.closed) {
@@ -56,7 +61,6 @@ export default class AStar extends Grid {
 		this.animateCurrentPath(ctx, current);
 
 		if (current === this.end) {
-			// found
 			this.resolveSolution();
 			return;
 		}
@@ -64,13 +68,13 @@ export default class AStar extends Grid {
 		this.open.splice(bestIndex, 1);
 		this.closed.push(current);
 
-		for (const neighbor of current.getSiblings(this.nodes, true, false)) {
-			const tentativeGScore = getG(current) + this.heuristic(current, neighbor);
+		for (const neighbor of current.getNeighbors(this.nodes, true, false)) {
+			const tentativeGScore = getG(current) + AStar.heuristic(current, neighbor);
 
 			if (tentativeGScore < getG(neighbor)) {
 				neighbor.parent = current;
 				this.gScore.set(neighbor, tentativeGScore);
-				this.fScore.set(neighbor, tentativeGScore + this.heuristic(neighbor, this.end));
+				this.fScore.set(neighbor, tentativeGScore + AStar.heuristic(neighbor, this.end));
 
 				if (!this.open.includes(neighbor)) {
 					this.open.push(neighbor);

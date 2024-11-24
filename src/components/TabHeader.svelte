@@ -14,16 +14,13 @@
 	$: currentPath = $page.url.pathname;
 </script>
 
-<nav class="border-b-[1px] border-b-midnight-700 bg-midnight-800">
+<nav class="border-b-[1px] border-b-midnight-700 bg-midnight-800 font-medium">
 	<ul class="flex overflow-x-auto">
 		{#each links as { name, href }}
 			<li
-				class={`flex items-center border-r-[1px] border-midnight-700 ${currentPath === href ? 'bg-midnight-900' : ''}`}
+				class={`flex items-center border-r-[1px] border-t-2 border-r-midnight-700 ${currentPath === href ? 'border-t-my-orange bg-midnight-900' : 'border-t-transparent'}`}
 			>
-				<a
-					{href}
-					class={`block border-t-2 border-midnight-700 p-4 font-medium ${currentPath === href ? 'border-t-my-orange text-white' : 'border-t-transparent text-gray-400'}`}
-				>
+				<a {href} class={`block p-4 ${currentPath === href ? 'text-white' : 'text-gray-400'}`}>
 					{name}
 				</a>
 			</li>

@@ -186,17 +186,13 @@ export abstract class Grid {
 			temp = temp.parent;
 		}
 	}
-
-	heuristic(a: Node, b: Node) {
-		return Math.abs(a.i - b.i) + Math.abs(a.j - b.j);
-	}
 }
 
 export class Node {
 	i: number;
 	j: number;
 	wall: boolean;
-	siblings?: Node[];
+	neighbors?: Node[];
 	parent?: Node;
 
 	constructor(i: number, j: number) {
@@ -205,10 +201,10 @@ export class Node {
 		this.wall = false;
 	}
 
-	getSiblings(grid: Node[][], checkDiagonals: boolean, checkCornerDiagonals: boolean) {
-		if (this.siblings) return this.siblings;
+	getNeighbors(grid: Node[][], checkDiagonals: boolean, checkCornerDiagonals: boolean) {
+		if (this.neighbors) return this.neighbors;
 
-		const siblings: Node[] = [];
+		const neighbors: Node[] = [];
 		const { i, j } = this;
 
 		function getRelativeNode(changeI: number, changeJ: number) {
@@ -216,7 +212,7 @@ export class Node {
 			return row && row[j + changeJ];
 		}
 
-		function trySibling(changeI: number, changeJ: number, cornerWallChecks?: number[][]) {
+		function tryNeighbor(changeI: number, changeJ: number, cornerWallChecks?: number[][]) {
 			const node = getRelativeNode(changeI, changeJ);
 
 			if (node && !node.wall) {
@@ -236,14 +232,14 @@ export class Node {
 					}
 				}
 
-				siblings.push(node);
+				neighbors.push(node);
 			}
 		}
 
-		trySibling(-1, 0);
-		trySibling(1, 0);
-		trySibling(0, -1);
-		trySibling(0, 1);
+		tryNeighbor(-1, 0);
+		tryNeighbor(1, 0);
+		tryNeighbor(0, -1);
+		tryNeighbor(0, 1);
 
 		if (checkDiagonals) {
 			//the third argument here is an array of two transformations you need to do
@@ -252,43 +248,28 @@ export class Node {
 			//transformations you need to do for the second adjacaent node
 			//note: adjacent from the current node and to the next possible node
 
-			trySibling(-1, 1, [
+			tryNeighbor(-1, 1, [
 				[-1, 0],
 				[0, 1]
 			]);
 
-			trySibling(1, 1, [
+			tryNeighbor(1, 1, [
 				[1, 0],
 				[0, 1]
 			]);
 
-			trySibling(1, -1, [
+			tryNeighbor(1, -1, [
 				[0, -1],
 				[1, 0]
 			]);
 
-			trySibling(-1, -1, [
+			tryNeighbor(-1, -1, [
 				[-1, 0],
 				[0, -1]
 			]);
 		}
 
-		this.siblings = siblings;
-		return siblings;
+		this.neighbors = neighbors;
+		return neighbors;
 	}
-
-	// public LinkedList<Cell> getNeighbors(Cell c) {
-	//     LinkedList<Cell> cells = new LinkedList<Cell>();
-	//     int[][] steps = new int[][] { { -1, 0 }, { 1, 0 }, { 0, 1 }, { 0, -1 } };
-	//     // int[][] steps = new int[][] { { -1, 0 }, { 1, 0 }, { 0, 1 }, { 0, -1 },
-	//     // { 1, 1 }, { 1, -1 }, { -1, 1 }, { -1, -1 } };
-	//     for (int[] step : steps) {
-	//         int nextRow = c.getRow() + step[0];
-	//         int nextCol = c.getCol() + step[1];
-	//         if (nextRow >= 0 && nextRow < getRows() && nextCol >= 0 && nextCol < getCols()
-	//                 && get(nextRow, nextCol).getType() != CellType.OBSTACLE)
-	//             cells.addLast(get(nextRow, nextCol));
-	//     }
-	//     return cells;
-	// }
 }

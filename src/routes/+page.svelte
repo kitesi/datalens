@@ -11,7 +11,7 @@
 
 		<h2 class="max-w-4xl text-xl text-slate-200 lg:text-2xl xl:text-3xl">
 			Welcome to DataLens! This is a collection of interactive data visualizations, machine learning
-			models, and data-structure (array, hashmaps, etc) focused visualizations. This is a project
+			models, and data-structure (arrays, hashmaps, etc) focused visualizations. This is a project
 			in-progress as I wrap up my Data Analysis & Visualization class. Click on any of the links in
 			the navigation bar to explore the different projects.
 			<p class="mt-4">
